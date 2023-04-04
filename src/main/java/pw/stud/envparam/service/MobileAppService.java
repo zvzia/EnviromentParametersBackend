@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import pw.stud.envparam.DbMock;
-import pw.stud.envparam.model.Sensor;
-import pw.stud.envparam.model.SurroundingConditions;
-import pw.stud.envparam.model.DataRangeRequest;
+import pw.stud.envparam.model.*;
 
 import java.util.ArrayList;
 
@@ -24,8 +22,8 @@ public class MobileAppService {
         ArrayList<Sensor> sensors = dbMock.getSensorsList();
         return sensors;
     }
-    public Sensor getSensorById(@RequestParam("sensorId") int sensorId){
-        Sensor sensor = new DbMock().getSensorById(sensorId);
+    public Sensor getSensorById(@RequestBody SensorIdRequest sensorIdReq){
+        Sensor sensor = new DbMock().getSensorById(sensorIdReq.getSensorId());
         return sensor;
     }
 
@@ -34,7 +32,11 @@ public class MobileAppService {
         return lastUpdate;
     }
 
-
+    public ArrayList<SurroundingConditions> getLastRecordsForSensors(@RequestBody SensorsIdsRequest sensorsIds){
+        DbMock dbMock = new DbMock();
+        ArrayList<SurroundingConditions> surroundingConditions = dbMock.getLastRecordsForSensors(sensorsIds.getSensorIds());
+        return surroundingConditions;
+    }
 
 
 }

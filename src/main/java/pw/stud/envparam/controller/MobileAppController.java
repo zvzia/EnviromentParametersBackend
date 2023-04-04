@@ -32,20 +32,28 @@ public class MobileAppController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping(value = "/getSensorById", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/getSensorById", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<Sensor> getSensorById(@RequestParam("sensorId") int sensorId){
-
-        Sensor sensor = mobileAppService.getSensorById(sensorId);
+    public ResponseEntity<Sensor> getSensorById(@RequestBody SensorIdRequest sensorIdReq){
+        Sensor sensor = mobileAppService.getSensorById(sensorIdReq);
         return ResponseEntity.ok(sensor);
     }
 
     @GetMapping(value = "/getLastUpdateDateString", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> getLastUpdateDateString(){
+    public ResponseEntity<DateStringResponse> getLastUpdateDateString(){
+        DateStringResponse dateStringResponse = new DateStringResponse();
+        dateStringResponse.setLastUpdateDate(mobileAppService.getLastUpdateDateString());
+        return ResponseEntity.ok(dateStringResponse);
+    }
 
-        String lastUpdate = mobileAppService.getLastUpdateDateString();
-        return ResponseEntity.ok(lastUpdate);
+    @PostMapping(value = "/getLastRecordsForSensors", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<ArrayResponse> getLastRecordsForSensors(@RequestBody SensorsIdsRequest sensorsIds){
+        List<SurroundingConditions> elements = mobileAppService.getLastRecordsForSensors(sensorsIds);
+        ArrayResponse<SurroundingConditions> result = new ArrayResponse<SurroundingConditions>();
+        result.setElements(elements);
+        return ResponseEntity.ok(result);
     }
 
 

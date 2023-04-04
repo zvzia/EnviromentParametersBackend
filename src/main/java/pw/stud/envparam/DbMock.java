@@ -51,7 +51,7 @@ public class DbMock {
         return paramRecords;
     }
 
-    public ArrayList<SurroundingConditions> getLastRecords(){
+    public ArrayList<SurroundingConditions> getLastRecordsForSensors(int[] ids){
         ArrayList<SurroundingConditions> lastRecords = new ArrayList<>();
         lastRecords.add(new SurroundingConditions(5, 21.2F, 51, 1, getDate(2023, 0, 5, 12, 30 )));
         lastRecords.add(new SurroundingConditions(6, 21.3F, 59, 2, getDate(2023, 0, 5, 12, 30 )));
