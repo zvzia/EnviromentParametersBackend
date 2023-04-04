@@ -3,8 +3,17 @@ package pw.stud.envparam.model;
 import java.util.Objects;
 
 public class DataFromSensorRequest {
+    int sensorId;
     SurroundingConditions surroundingConditions;
     int batteryLevel;
+
+    public int getSensorId() {
+        return sensorId;
+    }
+
+    public void setSensorId(int sensorId) {
+        this.sensorId = sensorId;
+    }
 
     public SurroundingConditions getSurroundingConditions() {
         return surroundingConditions;
@@ -27,11 +36,11 @@ public class DataFromSensorRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DataFromSensorRequest that = (DataFromSensorRequest) o;
-        return batteryLevel == that.batteryLevel && Objects.equals(surroundingConditions, that.surroundingConditions);
+        return sensorId == that.sensorId && batteryLevel == that.batteryLevel && Objects.equals(surroundingConditions, that.surroundingConditions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(surroundingConditions, batteryLevel);
+        return Objects.hash(sensorId, surroundingConditions, batteryLevel);
     }
 }
