@@ -17,7 +17,7 @@ import java.util.List;
 public class SensorController {
     SensorService sensorService = new SensorService();
 
-    @PostMapping(value = "/getRecordsForSensorInRange", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/sendData", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<String> getRecordsForSensorInRange(@RequestBody DataFromSensorRequest dataFromSensorRequest){
         System.out.printf(dataFromSensorRequest.toString());
