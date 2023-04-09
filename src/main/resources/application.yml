@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;database=surrounding_conditions
+    password: ${DBPASS:surrounding_app}
+    username: surrounding_app
+
+
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServer2008Dialect

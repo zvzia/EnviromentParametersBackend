@@ -17,8 +17,8 @@ public class MobileAppController {
     @PostMapping(value = "/getRecordsForSensorInRange", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<ArrayResponse> getRecordsForSensorInRange(@RequestBody DataRangeRequest dataRangeRequest){
-        List<SurroundingConditions> elements = mobileAppService.getRecordsForSensorInRange(dataRangeRequest);
-        ArrayResponse<SurroundingConditions> result = new ArrayResponse<SurroundingConditions>();
+        List<SurroundingCondition> elements = mobileAppService.getRecordsForSensorInRange(dataRangeRequest);
+        ArrayResponse<SurroundingCondition> result = new ArrayResponse<SurroundingCondition>();
         result.setElements(elements);
         return ResponseEntity.ok(result);
     }
@@ -50,8 +50,8 @@ public class MobileAppController {
     @PostMapping(value = "/getLastRecordsForSensors", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<ArrayResponse> getLastRecordsForSensors(@RequestBody SensorsIdsRequest sensorsIds){
-        List<SurroundingConditions> elements = mobileAppService.getLastRecordsForSensors(sensorsIds);
-        ArrayResponse<SurroundingConditions> result = new ArrayResponse<SurroundingConditions>();
+        List<SurroundingCondition> elements = mobileAppService.getLastRecordsForSensors(sensorsIds);
+        ArrayResponse<SurroundingCondition> result = new ArrayResponse<SurroundingCondition>();
         result.setElements(elements);
         return ResponseEntity.ok(result);
     }

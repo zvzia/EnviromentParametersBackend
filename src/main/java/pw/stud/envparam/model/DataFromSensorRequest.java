@@ -3,15 +3,33 @@ package pw.stud.envparam.model;
 import java.util.Objects;
 
 public class DataFromSensorRequest {
-    SurroundingConditions surroundingConditions;
+    int sensorId;
+    float temperature;
+    int humidity;
     int batteryLevel;
 
-    public SurroundingConditions getSurroundingConditions() {
-        return surroundingConditions;
+    public int getSensorId() {
+        return sensorId;
     }
 
-    public void setSurroundingConditions(SurroundingConditions surroundingConditions) {
-        this.surroundingConditions = surroundingConditions;
+    public void setSensorId(int sensorId) {
+        this.sensorId = sensorId;
+    }
+
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(float temperature) {
+        this.temperature = temperature;
+    }
+
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(int humidity) {
+        this.humidity = humidity;
     }
 
     public int getBatteryLevel() {
@@ -27,11 +45,21 @@ public class DataFromSensorRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DataFromSensorRequest that = (DataFromSensorRequest) o;
-        return batteryLevel == that.batteryLevel && Objects.equals(surroundingConditions, that.surroundingConditions);
+        return sensorId == that.sensorId && Float.compare(that.temperature, temperature) == 0 && humidity == that.humidity && batteryLevel == that.batteryLevel;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(surroundingConditions, batteryLevel);
+        return Objects.hash(sensorId, temperature, humidity, batteryLevel);
+    }
+
+    @Override
+    public String toString() {
+        return "DataFromSensorRequest{" +
+                "sensorId=" + sensorId +
+                ", temperature=" + temperature +
+                ", humidity=" + humidity +
+                ", batteryLevel=" + batteryLevel +
+                '}';
     }
 }
