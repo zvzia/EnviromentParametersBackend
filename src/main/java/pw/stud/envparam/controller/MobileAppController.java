@@ -3,22 +3,28 @@ package pw.stud.envparam.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import pw.stud.envparam.dao.SensorEn;
+import pw.stud.envparam.dao.SurroundingConditionEn;
 import pw.stud.envparam.model.*;
 import pw.stud.envparam.service.MobileAppService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/mobile")
 public class MobileAppController {
 
-    MobileAppService mobileAppService = new MobileAppService();
+    MobileAppService mobileAppService;
+    public MobileAppController(MobileAppService mobileAppService) {
+        this.mobileAppService = mobileAppService;
+    }
 
     @PostMapping(value = "/getRecordsForSensorInRange", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<ArrayResponse> getRecordsForSensorInRange(@RequestBody DataRangeRequest dataRangeRequest){
-        List<SurroundingCondition> elements = mobileAppService.getRecordsForSensorInRange(dataRangeRequest);
-        ArrayResponse<SurroundingCondition> result = new ArrayResponse<SurroundingCondition>();
+        List<SurroundingConditionEn> elements = mobileAppService.getRecordsForSensorInRange(dataRangeRequest);
+        ArrayResponse<SurroundingConditionEn> result = new ArrayResponse<SurroundingConditionEn>();
         result.setElements(elements);
         return ResponseEntity.ok(result);
     }
@@ -26,16 +32,16 @@ public class MobileAppController {
     @GetMapping(value = "/getSensorsList", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<ArrayResponse> getSensorsList(){
-        List<Sensor> elements = mobileAppService.getSensorsList();
-        ArrayResponse<Sensor> result = new ArrayResponse<Sensor>();
+        List<SensorEn> elements = mobileAppService.getSensorsList();
+        ArrayResponse<SensorEn> result = new ArrayResponse<SensorEn>();
         result.setElements(elements);
         return ResponseEntity.ok(result);
     }
 
     @PostMapping(value = "/getSensorById", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<Sensor> getSensorById(@RequestBody SensorIdRequest sensorIdReq){
-        Sensor sensor = mobileAppService.getSensorById(sensorIdReq);
+    public ResponseEntity<Optional<SensorEn>> getSensorById(@RequestBody SensorIdRequest sensorIdReq){
+        Optional<SensorEn> sensor = mobileAppService.getSensorById(sensorIdReq);
         return ResponseEntity.ok(sensor);
     }
 
@@ -50,8 +56,8 @@ public class MobileAppController {
     @PostMapping(value = "/getLastRecordsForSensors", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<ArrayResponse> getLastRecordsForSensors(@RequestBody SensorsIdsRequest sensorsIds){
-        List<SurroundingCondition> elements = mobileAppService.getLastRecordsForSensors(sensorsIds);
-        ArrayResponse<SurroundingCondition> result = new ArrayResponse<SurroundingCondition>();
+        List<SurroundingConditionEn> elements = mobileAppService.getLastRecordsForSensors(sensorsIds);
+        ArrayResponse<SurroundingConditionEn> result = new ArrayResponse<SurroundingConditionEn>();
         result.setElements(elements);
         return ResponseEntity.ok(result);
     }

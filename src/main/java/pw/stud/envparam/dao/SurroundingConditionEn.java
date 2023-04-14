@@ -2,6 +2,7 @@ package pw.stud.envparam.dao;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -22,7 +23,7 @@ public class SurroundingConditionEn {
     private Integer humidity;
     @Basic
     @Column(name = "date")
-    private Date date;
+    private Timestamp date;
 
     public int getId() {
         return id;
@@ -56,11 +57,11 @@ public class SurroundingConditionEn {
         this.humidity = humidity;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 

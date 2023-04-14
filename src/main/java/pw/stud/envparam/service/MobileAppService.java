@@ -3,43 +3,50 @@ package pw.stud.envparam.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import pw.stud.envparam.DbMock;
+import pw.stud.envparam.dao.SensorEn;
+import pw.stud.envparam.dao.SensorRepo;
+import pw.stud.envparam.dao.SurroundingConditionEn;
 import pw.stud.envparam.dao.SurroundingConditionRepo;
 import pw.stud.envparam.model.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class MobileAppService {
 
     @Autowired
     SurroundingConditionRepo surroundingConditionRepo;
+    @Autowired
+    SensorRepo sensorRepo;
 
-    public ArrayList<SurroundingCondition> getRecordsForSensorInRange(@RequestBody DataRangeRequest rangeModel){
-        DbMock dbMock = new DbMock();
-        ArrayList<SurroundingCondition> surroundingConditions = dbMock.getRecordsForSensorInRange(rangeModel.getSensorId(), rangeModel.getStart(), rangeModel.getEnd());
-
+    public ArrayList<SurroundingConditionEn> getRecordsForSensorInRange(@RequestBody DataRangeRequest rangeModel){
+        Timestamp startSql = new java.sql.Timestamp(rangeModel.getStart().getTime());
+        Timestamp endSql = new java.sql.Timestamp(rangeModel.getEnd().getTime());
+        ArrayList<SurroundingConditionEn> surroundingConditions = surroundingConditionRepo.findRecordsForSensorInRange(rangeModel.getSensorId(), startSql, endSql);
         return surroundingConditions;
     }
 
-    public ArrayList<Sensor> getSensorsList(){
-        DbMock dbMock = new DbMock();
-        ArrayList<Sensor> sensors = dbMock.getSensorsList();
+    public ArrayList<SensorEn> getSensorsList(){
+        ArrayList<SensorEn> sensors = new ArrayList<SensorEn>(sensorRepo.findAll());
         return sensors;
     }
-    public Sensor getSensorById(@RequestBody SensorIdRequest sensorIdReq){
-        Sensor sensor = new DbMock().getSensorById(sensorIdReq.getSensorId());
+    public Optional<SensorEn> getSensorById(@RequestBody SensorIdRequest sensorIdReq){
+        Optional<SensorEn> sensor = sensorRepo.findById(sensorIdReq.getSensorId());
         return sensor;
     }
 
     public String getLastUpdateDateString(){
-        String lastUpdate = new DbMock().getLastUpdateDateString();
-        return lastUpdate;
+        Timestamp date = surroundingConditionRepo.findLastUpdateDate();
+        return date.toString();
     }
 
-    public ArrayList<SurroundingCondition> getLastRecordsForSensors(@RequestBody SensorsIdsRequest sensorsIds){
-        DbMock dbMock = new DbMock();
-        ArrayList<SurroundingCondition> surroundingConditions = dbMock.getLastRecordsForSensors(sensorsIds.getSensorIds());
+    public ArrayList<SurroundingConditionEn> getLastRecordsForSensors(@RequestBody SensorsIdsRequest sensorsIds){
+        ArrayList<SurroundingConditionEn> surroundingConditions = new ArrayList<>();
+        for (int id:sensorsIds.getSensorIds()) {
+            surroundingConditions.add(surroundingConditionRepo.getLastRecordForSensor(id));
+        }
         return surroundingConditions;
     }
 

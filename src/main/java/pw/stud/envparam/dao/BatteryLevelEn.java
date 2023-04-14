@@ -2,6 +2,7 @@ package pw.stud.envparam.dao;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +20,7 @@ public class BatteryLevelEn {
     private Integer batteryLevel;
     @Basic
     @Column(name = "date")
-    private Date date;
+    private Timestamp date;
 
     public int getId() {
         return id;
@@ -45,11 +46,11 @@ public class BatteryLevelEn {
         this.batteryLevel = batteryLevel;
     }
 
-    public Date getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
