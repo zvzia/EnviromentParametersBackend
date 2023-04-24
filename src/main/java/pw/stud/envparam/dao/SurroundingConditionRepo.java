@@ -3,7 +3,6 @@ package pw.stud.envparam.dao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import pw.stud.envparam.model.SurroundingCondition;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -19,4 +18,7 @@ public interface SurroundingConditionRepo extends JpaRepository<SurroundingCondi
 
     @Query(value = "SELECT * FROM surrounding_condition WHERE sensor_id=:sensorId AND date=(SELECT MAX(date) FROM surrounding_condition)", nativeQuery = true)
     SurroundingConditionEn getLastRecordForSensor(int sensorId);
+
+    @Query(value = "SELECT battery_level FROM surrounding_condition WHERE date=(SELECT MAX(date) FROM surrounding_condition)", nativeQuery = true)
+    int findLastBatteryLevelBySensorId(int sensorId);
 }

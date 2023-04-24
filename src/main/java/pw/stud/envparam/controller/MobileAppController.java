@@ -62,6 +62,16 @@ public class MobileAppController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping(value = "/getLastBatteryLevel", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<BatteryLevelResponse> getLastBatteryLevels(@RequestBody SensorIdRequest sensorIdReq){
+        BatteryLevelResponse batteryLevel = new BatteryLevelResponse();
+        batteryLevel.setSensorId(sensorIdReq.getSensorId());
+        batteryLevel.setBatteryLvl(mobileAppService.getLastBatteryLevel(sensorIdReq));
+
+        return ResponseEntity.ok(batteryLevel);
+    }
+
 
 
 }

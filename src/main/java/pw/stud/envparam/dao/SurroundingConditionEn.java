@@ -24,6 +24,9 @@ public class SurroundingConditionEn {
     @Basic
     @Column(name = "date")
     private Timestamp date;
+    @Basic
+    @Column(name = "battery_level")
+    private Integer batteryLevel;
 
     public int getId() {
         return id;
@@ -76,5 +79,13 @@ public class SurroundingConditionEn {
     @Override
     public int hashCode() {
         return Objects.hash(id, sensorId, temperature, humidity, date);
+    }
+
+    public Integer getBatteryLevel() {
+        return batteryLevel;
+    }
+
+    public void setBatteryLevel(Integer batteryLevel) {
+        this.batteryLevel = batteryLevel;
     }
 }

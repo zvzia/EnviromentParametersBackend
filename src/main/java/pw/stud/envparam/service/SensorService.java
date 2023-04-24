@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import pw.stud.envparam.dao.*;
 import pw.stud.envparam.model.DataFromSensorRequest;
-import pw.stud.envparam.model.SurroundingCondition;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -27,12 +26,7 @@ public class SensorService {
         condition.setHumidity(dataFromSensorRequest.getHumidity());
         Date date = new Date();
         condition.setDate(new java.sql.Timestamp(date.getTime()));
+        condition.setBatteryLevel(dataFromSensorRequest.getBatteryLevel());
         surroundingConditionRepo.save(condition);
-
-        BatteryLevelEn batteryLevelEn = new BatteryLevelEn();
-        batteryLevelEn.setSensorId(dataFromSensorRequest.getSensorId());
-        batteryLevelEn.setBatteryLevel(dataFromSensorRequest.getBatteryLevel());
-        batteryLevelEn.setDate(new java.sql.Timestamp(date.getTime()));
-        batteryLevelRepo.save(batteryLevelEn);
     }
 }
