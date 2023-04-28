@@ -14,8 +14,6 @@ import java.util.Date;
 public class SensorService {
     @Autowired
     SurroundingConditionRepo surroundingConditionRepo;
-    @Autowired
-    BatteryLevelRepo batteryLevelRepo;
 
 
     public void sendData(@RequestBody DataFromSensorRequest dataFromSensorRequest){

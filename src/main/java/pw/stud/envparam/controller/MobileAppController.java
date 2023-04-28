@@ -72,6 +72,13 @@ public class MobileAppController {
         return ResponseEntity.ok(batteryLevel);
     }
 
+    @PostMapping(value = "/updateSensorName", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<String> updateSensorName(@RequestBody Sensor sensor){
+        mobileAppService.updateSensorName(sensor);
+
+        return ResponseEntity.ok("OK");
+    }
 
 
 }

@@ -57,5 +57,9 @@ public class MobileAppService {
         return batteryLevel;
     }
 
+    public void updateSensorName(@RequestBody Sensor sensor){
+        sensorRepo.updateSensorName(sensor.getId(), sensor.getName());
+    }
+
 
 }
