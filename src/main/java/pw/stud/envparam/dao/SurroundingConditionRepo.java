@@ -16,9 +16,9 @@ public interface SurroundingConditionRepo extends JpaRepository<SurroundingCondi
     @Query(value = "SELECT date FROM surrounding_condition WHERE date=(SELECT MAX(date) FROM surrounding_condition)", nativeQuery = true)
     Timestamp findLastUpdateDate();
 
-    @Query(value = "SELECT * FROM surrounding_condition WHERE sensor_id=:sensorId AND date=(SELECT MAX(date) FROM surrounding_condition)", nativeQuery = true)
+    @Query(value = "SELECT TOP 1 * FROM surrounding_condition WHERE sensor_id=:sensorId ORDER BY id DESC", nativeQuery = true)
     SurroundingConditionEn getLastRecordForSensor(int sensorId);
 
-    @Query(value = "SELECT battery_level FROM surrounding_condition WHERE date=(SELECT MAX(date) FROM surrounding_condition)", nativeQuery = true)
+    @Query(value = "SELECT TOP 1 battery_level FROM surrounding_condition WHERE sensor_id=:sensorId ORDER BY id DESC", nativeQuery = true)
     int findLastBatteryLevelBySensorId(int sensorId);
 }
