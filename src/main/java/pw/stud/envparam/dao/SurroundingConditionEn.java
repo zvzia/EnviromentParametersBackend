@@ -6,7 +6,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "surrounding_condition", schema = "dbo", catalog = "surrounding_conditions")
+@Table(name = "surrounding_condition")
 public class SurroundingConditionEn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

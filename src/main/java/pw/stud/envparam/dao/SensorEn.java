@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sensor", schema = "dbo", catalog = "surrounding_conditions")
+@Table(name = "sensor")
 public class SensorEn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

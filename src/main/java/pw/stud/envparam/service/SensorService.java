@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import pw.stud.envparam.dao.*;
 import pw.stud.envparam.model.DataFromSensorRequest;
 
-import java.util.Calendar;
 import java.util.Date;
 
 
