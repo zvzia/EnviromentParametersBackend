@@ -25,4 +25,11 @@ public class SensorIdRequest {
     public int hashCode() {
         return Objects.hash(sensorId);
     }
+
+    @Override
+    public String toString() {
+        return "SensorIdRequest{" +
+                "sensorId=" + sensorId +
+                '}';
+    }
 }

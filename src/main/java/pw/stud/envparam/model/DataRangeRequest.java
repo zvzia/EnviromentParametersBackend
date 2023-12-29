@@ -44,4 +44,13 @@ public class DataRangeRequest {
     public int hashCode() {
         return Objects.hash(sensorId, start, end);
     }
+
+    @Override
+    public String toString() {
+        return "DataRangeRequest{" +
+                "sensorId=" + sensorId +
+                ", start=" + start +
+                ", end=" + end +
+                '}';
+    }
 }

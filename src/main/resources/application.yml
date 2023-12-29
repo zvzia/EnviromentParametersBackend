@@ -1,11 +1,11 @@
 spring:
   datasource:
-#    url: jdbc:sqlserver://localhost:1433;database=surrounding_conditions
-#    password: ${DBPASS:surrounding_app}
-#    username: surrounding_app
-    url: jdbc:sqlserver://enviroment-parameters.database.windows.net:1433;database=surrounding_conditions;user=dbadmin@enviroment-parameters;password={enviromentparameters1*};encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-#    password: ${DBPASS:surrounding_app}
-#    username: surrounding_app
+    url: jdbc:sqlserver://localhost:1433;database=SurroundingConditions
+    password: ${DBPASS:surrounding_app}
+    username: surrounding_app
+#    url: jdbc:sqlserver://enviroment-parameters.database.windows.net:1433;database=surrounding_conditions;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+#    password: ${DBPASS:enviromentparameters1*}
+#    username: ${DBUSER:dbadmin@enviroment-parameters}
 
 
   jpa:

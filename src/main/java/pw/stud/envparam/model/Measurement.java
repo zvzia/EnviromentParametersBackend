@@ -4,14 +4,14 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SurroundingCondition {
+public class Measurement {
     int id;
     float temperature;
     int humidity;
     int sensorId;
     Date date;
 
-    public SurroundingCondition(int id, float temperature, int humidity, int sensorId, Date date) {
+    public Measurement(int id, float temperature, int humidity, int sensorId, Date date) {
         this.id = id;
         this.temperature = temperature;
         this.humidity = humidity;
@@ -67,7 +67,7 @@ public class SurroundingCondition {
 
     @Override
     public String toString() {
-        return "SurroundingCondition{" +
+        return "Measurement{" +
                 "id=" + id +
                 ", temperature=" + temperature +
                 ", humidity=" + humidity +

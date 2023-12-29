@@ -25,4 +25,11 @@ public class SensorsIdsRequest {
     public int hashCode() {
         return Arrays.hashCode(sensorIds);
     }
+
+    @Override
+    public String toString() {
+        return "SensorsIdsRequest{" +
+                "sensorIds=" + Arrays.toString(sensorIds) +
+                '}';
+    }
 }

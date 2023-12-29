@@ -7,6 +7,7 @@ public class DataFromSensorRequest {
     float temperature;
     int humidity;
     int batteryLevel;
+    String token;
 
     public int getSensorId() {
         return sensorId;
@@ -38,6 +39,14 @@ public class DataFromSensorRequest {
 
     public void setBatteryLevel(int batteryLevel) {
         this.batteryLevel = batteryLevel;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override

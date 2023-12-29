@@ -1,13 +1,12 @@
 package pw.stud.envparam.dao;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "surrounding_condition")
-public class SurroundingConditionEn {
+@Table(name = "measurement")
+public class MeasurementEn {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -72,7 +71,7 @@ public class SurroundingConditionEn {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SurroundingConditionEn that = (SurroundingConditionEn) o;
+        MeasurementEn that = (MeasurementEn) o;
         return id == that.id && sensorId == that.sensorId && Objects.equals(temperature, that.temperature) && Objects.equals(humidity, that.humidity) && Objects.equals(date, that.date);
     }
 
