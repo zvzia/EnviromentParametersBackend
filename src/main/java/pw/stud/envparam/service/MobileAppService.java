@@ -124,7 +124,7 @@ public class MobileAppService {
         return surroundingConditions;
     }
 
-    public int getLastBatteryLevel(int sensorId, String email) {
+    public Integer getLastBatteryLevel(int sensorId, String email) {
         int userId = 0;
         try {
             userId = getUserId(email);
@@ -133,8 +133,8 @@ public class MobileAppService {
         }
 
         //TODO sprawdzanie user id
-        int batteryLevel = measurementRepo.findLastBatteryLevelBySensorId(sensorId);
-        return batteryLevel;
+        Optional<Integer> batteryLevel = measurementRepo.findLastBatteryLevelBySensorId(sensorId);
+        return batteryLevel.orElse(null);
     }
 
     public void updateSensorName(@RequestBody Sensor sensor) {
@@ -161,20 +161,22 @@ public class MobileAppService {
     public void setSensorConfig(@RequestBody SensorConfigRequest sensorConfig) {
         sensorRepo.updateSensorName(sensorConfig.getSensorId(), sensorConfig.getSensorName());
 
-        Optional<SensorConfigEn> sensorConfigEn = sensorConfigRepo.findSensorConfigEnBySensorId(sensorConfig.getSensorId());
-        if(sensorConfigEn.isPresent()){
-            sensorConfigRepo.updateSensorConfig(
-                    sensorConfig.getSensorId(),
-                    sensorConfig.getMeasurementFreq(),
-                    (double)sensorConfig.getTemperatureMax(),
-                    (double)sensorConfig.getTemperatureMin(),
-                    sensorConfig.getHumidityMax(),
-                    sensorConfig.getHumidityMin());
+        Optional<SensorConfigEn> sensorConfigEnOpt = sensorConfigRepo.findSensorConfigEnBySensorId(sensorConfig.getSensorId());
+        if(sensorConfigEnOpt.isPresent()){
+            SensorConfigEn sensorConfigEn = sensorConfigEnOpt.get();
+
+            sensorConfigEn.setMeasurmentFrequency(sensorConfig.getMeasurementFreq());
+            sensorConfigEn.setMaxTemp(sensorConfig.getTemperatureMax());
+            sensorConfigEn.setMinTemp(sensorConfig.getTemperatureMin());
+            sensorConfigEn.setMaxHumidity(sensorConfig.getHumidityMax());
+            sensorConfigEn.setMinHumidity(sensorConfig.getHumidityMin());
+
+            sensorConfigRepo.save(sensorConfigEn);
         }else {
             SensorConfigEn newSensorConfigEn = new SensorConfigEn(sensorConfig.getSensorId(),
                     sensorConfig.getMeasurementFreq(),
-                    (double)sensorConfig.getTemperatureMax(),
-                    (double)sensorConfig.getTemperatureMin(),
+                    sensorConfig.getTemperatureMax(),
+                    sensorConfig.getTemperatureMin(),
                     sensorConfig.getHumidityMax(),
                     sensorConfig.getHumidityMin());
             sensorConfigRepo.save(newSensorConfigEn);

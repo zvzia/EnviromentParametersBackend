@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Repository
 public interface MeasurementRepo extends JpaRepository<MeasurementEn,Integer> {
@@ -20,5 +21,5 @@ public interface MeasurementRepo extends JpaRepository<MeasurementEn,Integer> {
     MeasurementEn getLastRecordForSensor(int sensorId);
 
     @Query(value = "SELECT TOP 1 battery_level FROM measurement WHERE sensor_id=:sensorId ORDER BY id DESC", nativeQuery = true)
-    int findLastBatteryLevelBySensorId(int sensorId);
+    Optional<Integer> findLastBatteryLevelBySensorId(int sensorId);
 }

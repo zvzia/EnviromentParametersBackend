@@ -4,8 +4,8 @@ public class SensorConfigResponse {
 
     String sensorName;
     int measurementFreq;
-    Float temperatureMax;
-    Float temperatureMin;
+    Double temperatureMax;
+    Double temperatureMin;
     Integer humidityMax;
     Integer humidityMin;
 
@@ -25,19 +25,19 @@ public class SensorConfigResponse {
         this.measurementFreq = measurementFreq;
     }
 
-    public Float getTemperatureMax() {
+    public Double getTemperatureMax() {
         return temperatureMax;
     }
 
-    public void setTemperatureMax(Float temperatureMax) {
+    public void setTemperatureMax(Double temperatureMax) {
         this.temperatureMax = temperatureMax;
     }
 
-    public Float getTemperatureMin() {
+    public Double getTemperatureMin() {
         return temperatureMin;
     }
 
-    public void setTemperatureMin(Float temperatureMin) {
+    public void setTemperatureMin(Double temperatureMin) {
         this.temperatureMin = temperatureMin;
     }
 

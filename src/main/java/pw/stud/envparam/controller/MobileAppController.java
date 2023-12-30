@@ -139,7 +139,7 @@ public class MobileAppController {
 
     @PatchMapping(value = "/updateSensorName", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> updateSensorName(@RequestBody Sensor sensor){
+    public ResponseEntity<StringResponse> updateSensorName(@RequestBody Sensor sensor){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
 
@@ -147,27 +147,27 @@ public class MobileAppController {
         //TODO zmienić w aplikacji
         mobileAppService.updateSensorName(sensor);
 
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok(new StringResponse("OK"));
     }
 
     @PostMapping(value = "/addSensor", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> addSensor(@RequestBody AddSensorRequest addSensorReq){
+    public ResponseEntity<StringResponse> addSensor(@RequestBody AddSensorRequest addSensorReq){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
 
         logger.info("/addSensor\n" + addSensorReq.toString() + "\n email: " + email);
         mobileAppService.addSensor(addSensorReq, email);
         
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok(new StringResponse("OK"));
     }
 
 
     @PatchMapping(value = "/setSensorConfig", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ResponseEntity<String> setSensorConfig(@RequestBody SensorConfigRequest sensorConfig){
+    public ResponseEntity<StringResponse> setSensorConfig(@RequestBody SensorConfigRequest sensorConfig){
         mobileAppService.setSensorConfig(sensorConfig);
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok(new StringResponse("OK"));
     }
 
     @GetMapping(value = "/getSensorConfig", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -181,8 +181,8 @@ public class MobileAppController {
 
             SensorConfigEn config = (SensorConfigEn) map.get("config");
             sensorConfigResponse.setMeasurementFreq(config.getMeasurmentFrequency());
-            sensorConfigResponse.setTemperatureMin(config.getMinTemp().floatValue());
-            sensorConfigResponse.setTemperatureMax(config.getMaxTemp().floatValue());
+            sensorConfigResponse.setTemperatureMin(config.getMinTemp());
+            sensorConfigResponse.setTemperatureMax(config.getMaxTemp());
             sensorConfigResponse.setHumidityMin(config.getMinHumidity());
             sensorConfigResponse.setHumidityMax(config.getMaxHumidity());
 
