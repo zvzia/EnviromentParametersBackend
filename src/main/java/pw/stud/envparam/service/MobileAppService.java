@@ -179,8 +179,6 @@ public class MobileAppService {
                     sensorConfig.getHumidityMin());
             sensorConfigRepo.save(newSensorConfigEn);
         }
-
-
     }
 
     public Map<String, Object> getSensorConfig(@RequestParam int sensorId) {
@@ -196,6 +194,26 @@ public class MobileAppService {
 
         return null;
     }
+
+    public UserResponse setUserInfo(String email, @RequestBody UserInfoRequest userInfoRequest) {
+        Optional<UserEn> userOpt = userRepo.findByEmail(email);
+        if (userOpt.isPresent()) {
+            UserEn userEn = userOpt.get();
+            userEn.setUsername(userInfoRequest.getName());
+            userEn.setEmail(userInfoRequest.getEmail());
+            userEn.setPassword(new BCryptPasswordEncoder().encode(userInfoRequest.getPassword()));
+            userRepo.save(userEn);
+
+            UserResponse user = new UserResponse(userEn.getId(), userEn.getUsername(), userEn.getEmail(), userInfoRequest.getPassword());
+            return user;
+        }
+
+        return null;
+    }
+
+
+
+
 
 
     private int getUserId(String email) throws Exception {

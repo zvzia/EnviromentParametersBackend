@@ -192,5 +192,14 @@ public class MobileAppController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PatchMapping(value = "/setUserInfo", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<UserResponse> setUserInfo(@RequestBody UserInfoRequest userInfoRequest){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        UserResponse user = mobileAppService.setUserInfo(email, userInfoRequest);
+        return ResponseEntity.ok(user);
+    }
 
 }
