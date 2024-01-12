@@ -156,6 +156,7 @@ public class MobileAppService {
         sensorEn.setUserId(userId);
 
         sensorRepo.save(sensorEn);
+        return;
     }
 
     public void setSensorConfig(@RequestBody SensorConfigRequest sensorConfig) {
@@ -210,6 +211,24 @@ public class MobileAppService {
             return user;
         }
 
+        return null;
+    }
+
+    public void setUserMsgToken(String email, @RequestBody MessageToken messageToken) {
+        Optional<UserEn> userOpt = userRepo.findByEmail(email);
+        if (userOpt.isPresent()) {
+            UserEn userEn = userOpt.get();
+            userEn.setMsgToken(messageToken.getMessageToken());
+            userRepo.save(userEn);
+        }
+    }
+
+    public MessageToken getUserMsgToken(String email) {
+        Optional<UserEn> userOpt = userRepo.findByEmail(email);
+        if (userOpt.isPresent()) {
+            String token = userOpt.get().getMsgToken();
+            return new MessageToken(token);
+        }
         return null;
     }
 

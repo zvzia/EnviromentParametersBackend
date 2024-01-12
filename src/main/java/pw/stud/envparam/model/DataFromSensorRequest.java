@@ -3,19 +3,10 @@ package pw.stud.envparam.model;
 import java.util.Objects;
 
 public class DataFromSensorRequest {
-    int sensorId;
     float temperature;
     int humidity;
     int batteryLevel;
     String token;
-
-    public int getSensorId() {
-        return sensorId;
-    }
-
-    public void setSensorId(int sensorId) {
-        this.sensorId = sensorId;
-    }
 
     public float getTemperature() {
         return temperature;
@@ -54,18 +45,17 @@ public class DataFromSensorRequest {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DataFromSensorRequest that = (DataFromSensorRequest) o;
-        return sensorId == that.sensorId && Float.compare(that.temperature, temperature) == 0 && humidity == that.humidity && batteryLevel == that.batteryLevel;
+        return Float.compare(that.temperature, temperature) == 0 && humidity == that.humidity && batteryLevel == that.batteryLevel;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(sensorId, temperature, humidity, batteryLevel);
+        return Objects.hash( temperature, humidity, batteryLevel);
     }
 
     @Override
     public String toString() {
         return "DataFromSensorRequest{" +
-                "sensorId=" + sensorId +
                 ", temperature=" + temperature +
                 ", humidity=" + humidity +
                 ", batteryLevel=" + batteryLevel +

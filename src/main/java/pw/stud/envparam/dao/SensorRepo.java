@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Repository
 public interface SensorRepo extends JpaRepository<SensorEn,Integer> {
@@ -17,4 +18,6 @@ public interface SensorRepo extends JpaRepository<SensorEn,Integer> {
     void updateSensorName(int sensorId, String sensorName);
 
     ArrayList<SensorEn> findAllByUserId(int userId);
+
+    Optional<SensorEn> findByToken(String token);
 }

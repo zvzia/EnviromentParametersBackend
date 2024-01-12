@@ -19,6 +19,9 @@ public class UserEn {
     @Basic
     @Column(name = "password")
     private String password;
+    @Basic
+    @Column(name = "msg_token")
+    private String msgToken;
 
     public int getId() {
         return id;
@@ -52,16 +55,24 @@ public class UserEn {
         this.password = password;
     }
 
+    public String getMsgToken() {
+        return msgToken;
+    }
+
+    public void setMsgToken(String msgToken) {
+        this.msgToken = msgToken;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEn userEn = (UserEn) o;
-        return id == userEn.id && Objects.equals(username, userEn.username) && Objects.equals(email, userEn.email) && Objects.equals(password, userEn.password);
+        return id == userEn.id && Objects.equals(username, userEn.username) && Objects.equals(email, userEn.email) && Objects.equals(password, userEn.password) && Objects.equals(msgToken, userEn.msgToken);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, email, password);
+        return Objects.hash(id, username, email, password, msgToken);
     }
 }
