@@ -202,4 +202,13 @@ public class MobileAppController {
         return ResponseEntity.ok(user);
     }
 
+    @PatchMapping(value = "/setUserMsgToken", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ResponseEntity<StringResponse> setUserMsgToken(@RequestBody MessageToken messageToken){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        mobileAppService.setUserMsgToken(email, messageToken);
+        return ResponseEntity.ok(new StringResponse("OK"));
+    }
 }

@@ -12,25 +12,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-
     @Bean
     public PasswordEncoder getBcryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-/*
-    @Bean
-    public InMemoryUserDetailsManager get() {
-        UserDetails user = User.withUsername("jan")
-                .password(getBcryptPasswordEncoder().encode("jan123"))
-                .roles("USER")
-                .build();
-        UserDetails admin = User.withUsername("admin")
-                .password(getBcryptPasswordEncoder().encode("admin123"))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(Arrays.asList(user, admin));
-    }*/
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -41,16 +26,6 @@ public class SecurityConfig {
                 .and().httpBasic();
         return http.build();
     }
-
-
-
-   /* @Bean
-
-   user details service zaladowany jako service
-    UserDetailsService userDetailsService() {
-
-    }*/
-
 }
 
 
