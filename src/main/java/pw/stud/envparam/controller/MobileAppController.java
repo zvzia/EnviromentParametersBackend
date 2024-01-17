@@ -41,10 +41,10 @@ public class MobileAppController {
         return ResponseEntity.ok(new StringResponse("OK"));
     }
 
-    @PostMapping(value = "/login", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PostMapping(value = "/getUserData", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<UserResponse> login(@RequestBody LoginRequest loginRequest){
-        logger.info("/login\n" + loginRequest.toString());
+        logger.info("/getUserData\n" + loginRequest.toString());
         UserResponse user;
         try {
             user = mobileAppService.login(loginRequest);
@@ -98,13 +98,13 @@ public class MobileAppController {
         return ResponseEntity.ok(sensor);
     }
 
-    @GetMapping(value = "/getLastUpdateDateString", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/getLastUpdateDate", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public ResponseEntity<DateStringResponse> getLastUpdateDateString(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String email = authentication.getName();
 
-        logger.info("/getLastUpdateDateString\n" + "\n email: " + email);
+        logger.info("/getLastUpdateDate\n" + "\n email: " + email);
         DateStringResponse dateStringResponse = new DateStringResponse();
         dateStringResponse.setLastUpdateDate(mobileAppService.getLastUpdateDateString(email));
         return ResponseEntity.ok(dateStringResponse);
@@ -144,7 +144,6 @@ public class MobileAppController {
         String email = authentication.getName();
 
         logger.info("/updateSensorName\n" + sensor.toString() + "\n email: " + email);
-        //TODO zmienić w aplikacji
         mobileAppService.updateSensorName(sensor);
 
         return ResponseEntity.ok(new StringResponse("OK"));

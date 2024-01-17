@@ -1,15 +1,8 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;database=SurroundingConditions
-    password: ${DBPASS:surrounding_app}
-    username: surrounding_app
-#    url: jdbc:sqlserver://enviroment-parameters.database.windows.net:1433;database=surrounding_conditions;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
-#    password: ${DBPASS:enviromentparameters1*}
-#    username: ${DBUSER:dbadmin@enviroment-parameters}
-
-  #    password: ${DBPASS:enviromentparameters1*}
-  #    username: ${DBUSER:ep-dbadmin@enviroment-parameters}
-
+      url: jdbc:sqlserver://enviroment-parameters-dbadmin.database.windows.net:1433;database=SurroundingConditions;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+      password: ${DBPASS:}
+      username: ${DBUSER:}
 
   jpa:
     database-platform: org.hibernate.dialect.SQLServer2008Dialect

@@ -21,7 +21,7 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/mobile/registration", "/mobile/login", "/sensor/**").permitAll()
+                .antMatchers("/mobile/registration", "/sensor/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic();
         return http.build();
